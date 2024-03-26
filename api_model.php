@@ -52,7 +52,7 @@ function Connexion($email, $passwd)
                 return "error: Erreur lors de la génération du token JWT : " . $e->getMessage();
             }
         } else {
-           // Mot de passe incorrect
+            // Mot de passe incorrect
             $message = "error: Mot de passe incorrect";
             return $message;
         }
@@ -65,15 +65,15 @@ function Connexion($email, $passwd)
 
 
 
-function enregistrerResa($nom, $prenom, $mail, $dateVisite, $HeureVisite, $NbPersonne)
+function enregistrerResa($nom, $prenom, $mail, $dateVisite, $heureVisite, $NbPersonne)
 {
     global $db;
 
     // Préparer la requête SQL d'insertion
-    $req = $db->prepare('INSERT INTO reservation (nom, prenom, mail, dateVisite, HeureVisite, NbPersonne) VALUES (?, ?, ?, ?, ?, ?)');
+    $req = $db->prepare('INSERT INTO reservation (nom, prenom, mail, dateVisite, heureVisite, NbPersonne) VALUES (?, ?, ?, ?, ?, ?)');
 
     // Exécuter la requête en passant les valeurs en tant que paramètres
-    $result = $req->execute(array($nom, $prenom, $mail, $dateVisite, $HeureVisite, $NbPersonne));
+    $result = $req->execute(array($nom, $prenom, $mail, $dateVisite, $heureVisite, $NbPersonne));
 
     // Vérifier si l'insertion a réussi
     if ($result) {
@@ -126,8 +126,7 @@ function deleteReservation($id, $token)
             $req->execute(array($id));
             $message = "Reservation deleted";
             return $message;
-        }
-        else {
+        } else {
             $message = "problème est survenu lors de la suppression de la réservation";
             return $message;
         }
@@ -137,15 +136,15 @@ function deleteReservation($id, $token)
     }
 }
 
-function updateReservation($nom, $prenom, $email, $dateVisite, $HeureVisite, $NbPersonne, $token, $id)
+function updateReservation($nom, $prenom, $email, $dateVisite, $heureVisite, $NbPersonne, $token, $id)
 {
     global $db;
     $secretKey = 'kjhgfdvdjfv';
     try {
         $decoded = JWT::decode($token, new Key($secretKey, 'HS256'));
         if ($decoded) {
-            $req = $db->prepare('UPDATE reservation SET nom = ?, prenom = ?, mail = ?, dateVisite = ?, HeureVisite = ?, NbPersonne = ? WHERE id = ?');
-            $success = $req->execute(array($nom, $prenom, $email, $dateVisite, $HeureVisite, $NbPersonne, $id));
+            $req = $db->prepare('UPDATE reservation SET nom = ?, prenom = ?, mail = ?, dateVisite = ?, heureVisite = ?, NbPersonne = ? WHERE id = ?');
+            $success = $req->execute(array($nom, $prenom, $email, $dateVisite, $heureVisite, $NbPersonne, $id));
             if ($success) {
                 $message = "Reservation modified";
             } else {

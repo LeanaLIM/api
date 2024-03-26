@@ -46,18 +46,18 @@ switch ($request_method) {
             exit;
         } elseif (!empty($_POST['action']) && $_POST['action'] === 'update' && !empty($_POST['token']) && !empty($_POST['id'])) {
             // Vérifier si les données de mise à jour de réservation sont présentes dans la requête POST
-            if (isset($_POST['id']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['emailupdate']) && isset($_POST['dateVisite']) && isset($_POST['heurevisite']) && isset($_POST['NbPersonne'])) {
+            if (isset($_POST['id']) && isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['emailupdate']) && isset($_POST['dateVisite']) && isset($_POST['heureVisite']) && isset($_POST['NbPersonne'])) {
                 // Récupérer les données de mise à jour de réservation depuis la requête POST
                 $id = $_POST['id'];
                 $nom = htmlspecialchars($_POST['nom']);
                 $prenom = htmlspecialchars($_POST['prenom']);
                 $email = htmlspecialchars($_POST['emailupdate']);
                 $dateVisite = htmlspecialchars($_POST['dateVisite']);
-                $HeureVisite = htmlspecialchars($_POST['heurevisite']);
+                $heureVisite = htmlspecialchars($_POST['heureVisite']);
                 $NbPersonne = htmlspecialchars($_POST['NbPersonne']);
 
                 // Appeler la fonction pour mettre à jour la réservation
-                $result = updateReservation($nom, $prenom, $email, $dateVisite, $HeureVisite, $NbPersonne, $_POST['token'], $id);
+                $result = updateReservation($nom, $prenom, $email, $dateVisite, $heureVisite, $NbPersonne, $_POST['token'], $id);
 
                 // Retourner le résultat de la mise à jour
                 header('Content-Type: application/json');
@@ -76,17 +76,17 @@ switch ($request_method) {
             exit;
         } elseif
         // Vérifier si les données de réservation sont présentes dans la requête POST
-        (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['mail']) && isset($_POST['dateVisite']) && isset($_POST['HeureVisite']) && isset($_POST['NbPersonne'])) {
+        (isset($_POST['nom']) && isset($_POST['prenom']) && isset($_POST['mail']) && isset($_POST['dateVisite']) && isset($_POST['heureVisite']) && isset($_POST['NbPersonne'])) {
             // Récupérer les données de réservation depuis la requête POST
             $nom = htmlspecialchars($_POST['nom']);
             $prenom = htmlspecialchars($_POST['prenom']);
             $mail = htmlspecialchars($_POST['mail']);
             $dateVisite = htmlspecialchars($_POST['dateVisite']);
-            $HeureVisite = htmlspecialchars($_POST['HeureVisite']);
+            $heureVisite = htmlspecialchars($_POST['heureVisite']);
             $NbPersonne = htmlspecialchars($_POST['NbPersonne']);
 
             // Appeler la fonction pour enregistrer la réservation
-            $result = enregistrerResa($nom, $prenom, $mail, $dateVisite, $HeureVisite, $NbPersonne);
+            $result = enregistrerResa($nom, $prenom, $mail, $dateVisite, $heureVisite, $NbPersonne);
 
             // Vérifier le résultat de l'opération et retourner une réponse appropriée
             if ($result !== false) {
